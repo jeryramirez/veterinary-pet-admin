@@ -49,14 +49,21 @@ class NewDate extends Component {
         this.props.createNewDate(newDate)
     }
 
-
     render() {
+
+        const { error } = this.state;
+
         return (
             <div className="card mt-5 py-3">
                 <div className="card-body">
                     <h2 className="card-title text-center mb-5">
                         Completar Campos Correspondientes
                     </h2>
+
+                    {error ? <div className="alert alert-danger text-center">todos los campos son obligatorios</div> : null}
+
+
+
                     {/* por convencion a los eventos se les pone el prefijo handle seguido del nombre del evento */}
                     <form onSubmit={this.handleSubmit}>
 
