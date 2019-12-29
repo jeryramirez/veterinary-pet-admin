@@ -85,6 +85,7 @@ class NewDate extends Component {
                                     placeholder="Nombre Mascota"
                                     name="mascota"
                                     onChange={this.handleChange}
+                                    //this is used to empty the inputs
                                     value={this.state.cita.mascota}
                                 />
                             </div>

@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import Header from './components/Header'
 import NewDate from './components/NewDate';
+import DatesList from './components/DatesList';
 class App extends Component{
     state = {
-        citas: []
+        dates: []
     }
 
-    createNewDate = dates => {
+    createNewDate = d => {
         //copiar el state
-        const citas = [...this.state.citas, dates];
+        const dates = [...this.state.dates, d];
 
         //agregar nuevo state
         this.setState({
-            citas
+            dates
         })
     }
     render() {
@@ -27,7 +28,13 @@ class App extends Component{
                             createNewDate={this.createNewDate}
                         />
                     </div>
+                    <div className="mt-3 col-md-10 mx-auto">
+                        <DatesList
+                            cita={this.state.dates}
+                        />
+                    </div>
                 </div>
+
             </div>
         );
     }
