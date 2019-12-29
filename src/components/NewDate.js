@@ -70,11 +70,8 @@ class NewDate extends Component {
             }, 3000);
         }
         return (
-            <div className="card mt-5 py-3">
+            <div className="card mt-2 py-3">
                 <div className="card-body">
-                    <h2 className="card-title text-center mb-5">
-                        Completar Campos Correspondientes
-                    </h2>
 
                     {message()}
                     

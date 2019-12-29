@@ -45,9 +45,9 @@ class App extends Component{
 
     render() {
         return (
-            <div className="container mb-5">
+            <div className="container">
                 <Header
-                    titulo="Veterinary Pet Management"
+                    titulo="Pet Management"
                 />
                 <div className="row">
                     <div className="col-md-12 col-mx-auto">
