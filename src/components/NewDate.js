@@ -1,4 +1,5 @@
-import React, { Component}from 'react';
+import React, { Component } from 'react';
+import uuid from 'uuid'
 
 class NewDate extends Component {
 
@@ -10,7 +11,8 @@ class NewDate extends Component {
             fecha: '',
             hora: '',
             sintomas: ''
-        }
+        },
+        error: false
     }
     //this method process the event and here we can chage the state using this.setState{}
     handleChange = (e) => {
@@ -24,6 +26,29 @@ class NewDate extends Component {
         })
     }
 
+    //envio del formulario
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("The submit is OK")  
+        
+        // se extraen los valores del state
+        const { mascota, propietario, fecha, hora, sintomas } = this.state.cita;
+
+        // se validan los campos
+        if (mascota === '' || propietario === '' || fecha === '' || hora === '' || sintomas === '') {
+            this.setState({
+                error: true
+            });
+
+            return;
+        }
+        //generar objeto con los datos
+        const newDate = {...this.state.cita}
+        newDate.id = uuid();
+        // agrega la cita
+        this.props.createNewDate(newDate)
+    }
+
 
     render() {
         return (
@@ -32,7 +57,8 @@ class NewDate extends Component {
                     <h2 className="card-title text-center mb-5">
                         Completar Campos Correspondientes
                     </h2>
-                    <form>
+                    {/* por convencion a los eventos se les pone el prefijo handle seguido del nombre del evento */}
+                    <form onSubmit={this.handleSubmit}>
 
                         <div className="form-group row">
                             <label className="col-sm-4 col-lg-2 col-form-label">Nombre Mascota</label>
@@ -43,6 +69,7 @@ class NewDate extends Component {
                                     placeholder="Nombre Mascota"
                                     name="mascota"
                                     onChange={this.handleChange}
+                                    value={this.state.cita.mascota}
                                 />
                             </div>
                         </div> {/* form-group end ! */}
@@ -56,6 +83,7 @@ class NewDate extends Component {
                                     placeholder="Nombre Dueño Mascota"
                                     name="propietario"
                                     onChange={this.handleChange}
+                                    value={this.state.cita.propietario}
                                 />
                             </div>
                         </div> {/* form-group end ! */}
@@ -68,16 +96,18 @@ class NewDate extends Component {
                                     className="form-control"
                                     name="fecha"
                                     onChange={this.handleChange}
+                                    value={this.state.cita.fecha}
                                 />
                             </div>
                             
-                            <label className="col-sm-4 col-lg-2 col-form-label">Fecha</label>
+                            <label className="col-sm-4 col-lg-2 col-form-label">Hora</label>
                             <div className="col-sm-8 col-lg-4">
                                 <input
                                     type="time"
                                     className="form-control"
                                     name="hora"
                                     onChange={this.handleChange}
+                                    value={this.state.cita.hora}
                                 />
                             </div>
                         </div> {/* form-group end ! */}
@@ -90,6 +120,7 @@ class NewDate extends Component {
                                     name="sintomas"
                                     placeholder="Describe los sintomas"
                                     onChange={this.handleChange}
+                                    value={this.state.cita.sintomas}
                                     
                                 >
 

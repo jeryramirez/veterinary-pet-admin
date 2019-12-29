@@ -3,7 +3,17 @@ import Header from './components/Header'
 import NewDate from './components/NewDate';
 class App extends Component{
     state = {
+        citas: []
+    }
 
+    createNewDate = dates => {
+        //copiar el state
+        const citas = [...this.state.citas, dates];
+
+        //agregar nuevo state
+        this.setState({
+            citas
+        })
     }
     render() {
         return (
@@ -13,7 +23,9 @@ class App extends Component{
                 />
                 <div className="row">
                     <div className="col-md-12 col-mx-auto">
-                        <NewDate/>
+                        <NewDate
+                            createNewDate={this.createNewDate}
+                        />
                     </div>
                 </div>
             </div>
