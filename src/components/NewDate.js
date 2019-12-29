@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import uuid from 'uuid'
 
-class NewDate extends Component {
 
-    //this is the state here we have to add every input
-    state = { 
-        cita: {
+// esto se utiliza para que una vez se haya ejecutado el evento submit las variables del state queden vacias junto a los campols del form
+const initialState = {
+    cita: {
             mascota: '',
             propietario: '',
             fecha: '',
@@ -13,11 +12,16 @@ class NewDate extends Component {
             sintomas: ''
         },
         error: false
-    }
+}
+class NewDate extends Component {
+
+    //this is the state here we have to add every input
+    state = {...initialState}
     //this method process the event and here we can chage the state using this.setState{}
     handleChange = (e) => {
         
-        //this is a method we have to use ()
+        //this is a method, we have to use ()
+        //this method is used to sent the new dates from form to state
         this.setState({
             cita: {
                 ...this.state.cita,
@@ -29,7 +33,6 @@ class NewDate extends Component {
     //envio del formulario
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("The submit is OK")  
         
         // se extraen los valores del state
         const { mascota, propietario, fecha, hora, sintomas } = this.state.cita;
@@ -45,8 +48,14 @@ class NewDate extends Component {
         //generar objeto con los datos
         const newDate = {...this.state.cita}
         newDate.id = uuid();
+
         // agrega la cita
         this.props.createNewDate(newDate)
+
+            //empting every form input
+        this.setState({
+            ...initialState
+            })
     }
 
     render() {
