@@ -16,6 +16,20 @@ class App extends Component{
             dates
         })
     }
+
+    deleteDate = id => {
+        //hacer una copia del state
+        const currentlyDates = [...this.state.dates];
+
+        //cuerpo de la funcion
+        const dates = currentlyDates.filter(date => date.id !== id);
+
+        //agregar cambios al state
+        this.setState({
+            dates
+        })
+    }
+
     render() {
         return (
             <div className="container mb-5">
@@ -28,9 +42,10 @@ class App extends Component{
                             createNewDate={this.createNewDate}
                         />
                     </div>
-                    <div className="mt-3 col-md-10 mx-auto">
+                    <div className="mt-3 col-md-12 mx-auto">
                         <DatesList
                             cita={this.state.dates}
+                            deleteDate={this.deleteDate}
                         />
                     </div>
                 </div>
