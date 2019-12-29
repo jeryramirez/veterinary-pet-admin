@@ -7,7 +7,7 @@ class App extends Component{
     }
     render() {
         return (
-            <div className="container">
+            <div className="container mb-5">
                 <Header
                     titulo="Veterinary Pet Management"
                 />

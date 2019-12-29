@@ -1,13 +1,36 @@
 import React, { Component}from 'react';
 
 class NewDate extends Component {
-    state = {  }
+
+    //this is the state here we have to add every input
+    state = { 
+        cita: {
+            mascota: '',
+            propietario: '',
+            fecha: '',
+            hora: '',
+            sintomas: ''
+        }
+    }
+    //this method process the event and here we can chage the state using this.setState{}
+    handleChange = (e) => {
+        
+        //this is a method we have to use ()
+        this.setState({
+            cita: {
+                ...this.state.cita,
+                [e.target.name] : e.target.value
+            }
+        })
+    }
+
+
     render() {
         return (
-            <div className="card mt-5 py-5">
+            <div className="card mt-5 py-3">
                 <div className="card-body">
                     <h2 className="card-title text-center mb-5">
-                        complete los campos correspondientes
+                        Completar Campos Correspondientes
                     </h2>
                     <form>
 
@@ -19,6 +42,7 @@ class NewDate extends Component {
                                     className="form-control"
                                     placeholder="Nombre Mascota"
                                     name="mascota"
+                                    onChange={this.handleChange}
                                 />
                             </div>
                         </div> {/* form-group end ! */}
@@ -31,6 +55,7 @@ class NewDate extends Component {
                                     className="form-control"
                                     placeholder="Nombre Dueño Mascota"
                                     name="propietario"
+                                    onChange={this.handleChange}
                                 />
                             </div>
                         </div> {/* form-group end ! */}
@@ -42,6 +67,7 @@ class NewDate extends Component {
                                     type="date"
                                     className="form-control"
                                     name="fecha"
+                                    onChange={this.handleChange}
                                 />
                             </div>
                             
@@ -51,6 +77,7 @@ class NewDate extends Component {
                                     type="time"
                                     className="form-control"
                                     name="hora"
+                                    onChange={this.handleChange}
                                 />
                             </div>
                         </div> {/* form-group end ! */}
@@ -62,11 +89,15 @@ class NewDate extends Component {
                                     className="form-control"
                                     name="sintomas"
                                     placeholder="Describe los sintomas"
+                                    onChange={this.handleChange}
+                                    
                                 >
 
                                 </textarea>
                             </div>
                         </div> {/* form-group end ! */}
+
+                        <input type="submit" className="py-2 btn btn-block btn-success" value="Agregar nueva cita"/>
                     </form>
                 </div>
             </div>
