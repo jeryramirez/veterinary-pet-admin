@@ -1,5 +1,6 @@
 import React from 'react';
-import Date from './Date'
+import Date from './Date';
+import PropTypes from 'prop-types';
 const DatesList = ({ cita, deleteDate }) => (  
     <div className="card mt-2 py-5">
         <div className="card-body">
@@ -16,5 +17,8 @@ const DatesList = ({ cita, deleteDate }) => (
         </div>
     </div>
 );
- 
+DatesList.propTypes = {
+    cita: PropTypes.array.isRequired,
+    deleteDate: PropTypes.func.isRequired
+}
 export default DatesList;

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 const Date = ({ cita, deleteDate }) => (  
     <div className="media mt3">
         <div className="media-body">
@@ -21,5 +21,9 @@ const Date = ({ cita, deleteDate }) => (
 
 );
 
+Date.propTypes = {
+    cita: PropTypes.object.isRequired,
+    deleteDate: PropTypes.func.isRequired
+}
  
 export default Date;
