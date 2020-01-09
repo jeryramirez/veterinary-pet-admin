@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Alert from './Alert';
 import uuid from 'uuid';
 
 // esto se utiliza para que una vez se haya ejecutado el evento submit las variables del state queden vacias junto a los campols del form
@@ -35,15 +36,18 @@ class NewDate extends Component {
         
         // se extraen los valores del state
         const { mascota, propietario, fecha, hora, sintomas } = this.state.cita;
-
+        
         // se validan los campos
         if (mascota === '' || propietario === '' || fecha === '' || hora === '' || sintomas === '') {
             this.setState({
                 error: true
             });
-
+            setTimeout(() => {
+                document.querySelector('.alert-danger').remove()
+            }, 3000)
             return;
         }
+        
         //generar objeto con los datos
         const newDate = {...this.state.cita}
         newDate.id = uuid();
@@ -56,19 +60,10 @@ class NewDate extends Component {
             ...initialState
         })
     }
+
     
     render() {
-
         const { error } = this.state;
-        const message = () => {
-            /*{error ? <div className="alert alert-danger text-center">Todos Los Campos son Obligatorios</div> : null}*/
-            if (error) {
-                return <div className="alert alert-danger text-center">Todos Los Campos son Obligatorios</div>
-            }
-            setTimeout(() => {
-                return <div className="alert alert-danger text-center"> </div>
-            }, 3000);
-        }
         return (
             <div className="card mt-5 py-3">
                 <div className="card-body">
@@ -76,8 +71,12 @@ class NewDate extends Component {
                         Completar Campos Correspondientes
                     </h2>
 
-                    {message()}
+                    <Alert
+                        error={error}
+                        ocultar={this.ocultar}
+                    />
                     
+                        
                     {/* por convencion a los eventos se les pone el prefijo handle seguido del nombre del evento */}
                     <form onSubmit={this.handleSubmit}>
 
